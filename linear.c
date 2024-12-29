@@ -22,7 +22,7 @@ align_foward(uintptr_t ptr, size_t align) {
 
     assert(is_power_of_two(a));
 
-    // since a is a power of two, this does the same as % but does no require costly division
+    // since a is a power of two, this does the same as % but does not require costly division
     modulo = ptr & (a-1); 
 
     if (modulo != 0) {
@@ -40,7 +40,7 @@ typedef struct {
 
 void* 
 arena_alloc_align(Arena *a, size_t size, size_t align) {
-    // first align pointer for next allocation, the get relative offset
+    // first align pointer for next allocation, then get relative offset
     uintptr_t curr_ptr = (uintptr_t)a->buffer + (uintptr_t)a->curr_offset;
     uintptr_t rel_offset = align_foward(curr_ptr, align) - (uintptr_t)a->buffer;
 
